@@ -278,7 +278,9 @@ int main(int argc, char *argv[])
     matrix.push_back(vectorfila);                     //matriz de valoracios
     vaciosMatrix.push_back(calcularVacios(lines[i])); // matriz de vacios
   }
-  std::vector<float> correlacion;
+  for (int i = 0; i < matrix.size(); i++)
+  {
+    std::vector<float> correlacion;
   std::vector<float> coseno;
   std::vector<float> euclidia;
   std::pair<string, int> x;
@@ -328,7 +330,14 @@ int main(int argc, char *argv[])
   }
 
   Prediccionmedia(matrix, correlacion, vaciosMatrix, medias);
-writeMatrix(matrix);
+
+std::swap(matrix[0], matrix[i]);
+std::swap(vaciosMatrix[0], vaciosMatrix[i]);
+  
+  }
+  writeMatrix(matrix);
+
+  
   input_file.close();
 
   return EXIT_SUCCESS;

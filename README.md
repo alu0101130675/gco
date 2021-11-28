@@ -265,7 +265,6 @@ Metodo para imprimir una matriz
 ~~~c++
 int main(int argc, char *argv[])
 {
-  cout << "argumwntooooooooooooooooooooooooooooooooooooooooo" << argv[1] << endl;
   string filename("input.txt");
   vector<string> lines;
   string line;
@@ -299,7 +298,9 @@ int main(int argc, char *argv[])
     matrix.push_back(vectorfila);                     //matriz de valoracios
     vaciosMatrix.push_back(calcularVacios(lines[i])); // matriz de vacios
   }
-  std::vector<float> correlacion;
+  for (int i = 0; i < matrix.size(); i++)
+  {
+    std::vector<float> correlacion;
   std::vector<float> coseno;
   std::vector<float> euclidia;
   std::pair<string, int> x;
@@ -315,7 +316,6 @@ int main(int argc, char *argv[])
   }
   //PrediccionSimple(matrix, correlacion, vaciosMatrix);
   //media
-  cout << "medias: " << medias.size() << endl;
   if (argv[1] == "p")
   {
     if (argv[2] == "s")
@@ -351,13 +351,21 @@ int main(int argc, char *argv[])
 
   Prediccionmedia(matrix, correlacion, vaciosMatrix, medias);
 
+std::swap(matrix[0], matrix[i]);
+std::swap(vaciosMatrix[0], vaciosMatrix[i]);
+  
+  }
+  writeMatrix(matrix);
+
+  
   input_file.close();
 
   return EXIT_SUCCESS;
 }
 ~~~ 
-En el main basicamente leemos el fichero y llamamos a las distintas funcionalidades implementadas dependiendo de los argumentos que pasemos
-##Metodo de ejecuciom:
+En el main basicamente leemos el fichero y llamamos a las distintas funcionalidades implementadas dependiendo de los argumentos que pasemos. Las incognitas solo se calculan en la priemra fila por lo que hay dos swap abajo para que cubran toda la matriz el problema es que los usuarios no salen en el mismo orden pero los datos corresponden a los mimos.
+
+##Metodo de ejecucion:
 compilamos el archivo:
 g++ -std=c++11 lectura.cpp -o lectura
 ejecutamos con las opciones p e o c dependiendo de lo que queramos es decir: pearson,coseno, euclidia y en la segundo opcion ponemos simple o media con s o m. un ejemplo seria el siguiente
