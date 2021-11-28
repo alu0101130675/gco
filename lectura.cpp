@@ -24,14 +24,12 @@ void PrediccionSimple(std::vector<std::vector<int>> &matrix, std::vector<float> 
 
   for (int j = 0; j < matrixvacios[0].size(); j++)
   {
-    cout << "iteraciones: " << j << endl;
     for (int i = 1; i < matrix.size(); i++)
     {
       prediccionum += correlacioens[i] * matrix[i][matrixvacios[0][j]];
       predicciondenom += correlacioens[i];
     }
     float resultado = prediccionum / predicciondenom;
-    cout << "resultaod" << resultado;
       matrix[0][matrixvacios[0][j]]=resultado;
   }
 }
@@ -245,6 +243,7 @@ void writeMatrix(std::vector<std::vector<int>> matrix)
 }
 int main(int argc, char *argv[])
 {
+
   string filename("input.txt");
   vector<string> lines;
   string line;
@@ -296,45 +295,37 @@ int main(int argc, char *argv[])
   }
   //PrediccionSimple(matrix, correlacion, vaciosMatrix);
   //media
-  if (argv[1] == "p")
-  {
-    if (argv[2] == "s")
-    {
 
+  if (strcmp(argv[1], "p")==0)
+  {
+    if (strcmp(argv[2], "s")==0)
+    {
       PrediccionSimple(matrix, correlacion, vaciosMatrix);
     }
     else
       Prediccionmedia(matrix, correlacion, vaciosMatrix, medias);
   }
   ///codicion euclidia
-    if (argv[1] == "e")
+    if (strcmp(argv[1], "e")==0)
   {
-    if (argv[2] == "s")
+    if (strcmp(argv[2], "s")==0)
     {
-
       PrediccionSimple(matrix, correlacion, vaciosMatrix);
     }
     else
       Prediccionmedia(matrix, correlacion, vaciosMatrix, medias);
   }
   //coseno
-    if (argv[1] == "c")
+    if (strcmp(argv[1], "c")==0)
   {
-    if (argv[2] == "s")
-    {
-
+    if (strcmp(argv[2], "s")==0)
+    {         
       PrediccionSimple(matrix, correlacion, vaciosMatrix);
     }
     else
       Prediccionmedia(matrix, correlacion, vaciosMatrix, medias);
   }
-
-  Prediccionmedia(matrix, correlacion, vaciosMatrix, medias);
-
-std::swap(matrix[0], matrix[i]);
-std::swap(vaciosMatrix[0], vaciosMatrix[i]);
-  
-  }
+}
   writeMatrix(matrix);
 
   
