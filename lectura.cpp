@@ -325,6 +325,8 @@ int main(int argc, char *argv[])
     else
       Prediccionmedia(matrix, correlacion, vaciosMatrix, medias);
   }
+  std::swap(matrix[0], matrix[i]);
+std::swap(vaciosMatrix[0], vaciosMatrix[i]);
 }
   writeMatrix(matrix);
 
