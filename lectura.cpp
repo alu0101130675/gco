@@ -17,7 +17,7 @@ using std::make_pair;
 using std::string;
 using std::vector;
 
-void PrediccionSimple(std::vector<std::vector<int>> matrix, std::vector<float> correlacioens, std::vector<std::vector<int>> matrixvacios)
+void PrediccionSimple(std::vector<std::vector<int>> &matrix, std::vector<float> correlacioens, std::vector<std::vector<int>> matrixvacios)
 {
   float prediccionum = 0;
   float predicciondenom = 0;
@@ -32,9 +32,10 @@ void PrediccionSimple(std::vector<std::vector<int>> matrix, std::vector<float> c
     }
     float resultado = prediccionum / predicciondenom;
     cout << "resultaod" << resultado;
+      matrix[0][matrixvacios[0][j]]=resultado;
   }
 }
-void Prediccionmedia(std::vector<std::vector<int>> matrix, std::vector<float> correlacioens, std::vector<std::vector<int>> matrixvacios,
+void Prediccionmedia(std::vector<std::vector<int>> &matrix, std::vector<float> correlacioens, std::vector<std::vector<int>> matrixvacios,
                      std::vector<float> medias)
 {
   float prediccionum = 0;
@@ -42,14 +43,13 @@ void Prediccionmedia(std::vector<std::vector<int>> matrix, std::vector<float> co
   int k = 0;
   for (int j = 0; j < matrixvacios[0].size(); j++)
   {
-    cout << "iteraciones: " << j << endl;
     for (int i = 1; i < matrix.size(); i++)
     {
       prediccionum += correlacioens[i] * (matrix[i][matrixvacios[0][j]] - medias[i - 1]);
       predicciondenom += correlacioens[i];
     }
     float resultado = prediccionum / predicciondenom;
-    cout << "resultaod" << resultado;
+    matrix[0][matrixvacios[0][j]]=resultado;
   }
 }
 //Diferencia con la media.
@@ -170,12 +170,8 @@ float pearson(std::vector<int> a, std::vector<int> b, std::vector<int> vaciosA,
   {
     interseccionVacios = vaciosA;
   }
-
-  cout << "interseccion vacios" << interseccionVacios.size() << endl;
   media_A = media(a, interseccionVacios);
   media_B = media(b, interseccionVacios);
-  cout << "meddia a: " << media_A << endl;
-  cout << "meddia b: " << media_B << endl;
   medias.push_back(media_B);
   for (int i = 0; i < 4; i++)
   {
@@ -187,13 +183,8 @@ float pearson(std::vector<int> a, std::vector<int> b, std::vector<int> vaciosA,
       sumatorioB += pow(b[i] - media_B, 2);
     }
   }
-  cout << "numerador : " << numerador << endl;
-  cout << "sumatorio : " << sumatorio << endl;
-  cout << "sumatoriob : " << sumatorioB << endl;
   float denominador = sqrt(sumatorio) * sqrt(sumatorioB);
-  cout << "denominador : " << denominador << endl;
   float resultado_final = numerador / (denominador);
-  cout << resultado_final;
   return resultado_final;
 }
 std::vector<int> calcularVacios(string str)
@@ -254,7 +245,6 @@ void writeMatrix(std::vector<std::vector<int>> matrix)
 }
 int main(int argc, char *argv[])
 {
-  cout << "argumwntooooooooooooooooooooooooooooooooooooooooo" << argv[1] << endl;
   string filename("input.txt");
   vector<string> lines;
   string line;
@@ -304,7 +294,6 @@ int main(int argc, char *argv[])
   }
   //PrediccionSimple(matrix, correlacion, vaciosMatrix);
   //media
-  cout << "medias: " << medias.size() << endl;
   if (argv[1] == "p")
   {
     if (argv[2] == "s")
@@ -339,7 +328,7 @@ int main(int argc, char *argv[])
   }
 
   Prediccionmedia(matrix, correlacion, vaciosMatrix, medias);
-
+writeMatrix(matrix);
   input_file.close();
 
   return EXIT_SUCCESS;
