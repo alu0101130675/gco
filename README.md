@@ -363,7 +363,7 @@ std::swap(vaciosMatrix[0], vaciosMatrix[i]);
   return EXIT_SUCCESS;
 }
 ~~~ 
-En el main basicamente leemos el fichero y llamamos a las distintas funcionalidades implementadas dependiendo de los argumentos que pasemos. Las incognitas solo se calculan en la priemra fila por lo que hay dos swap abajo para que cubran toda la matriz el problema es que los usuarios no salen en el mismo orden pero los datos corresponden a los mimos.
+En el main basicamente leemos el fichero y llamamos a las distintas funcionalidades implementadas dependiendo de los argumentos que pasemos. Las incognitas solo se calculan en la priemra fila por lo que hay dos swap abajo para que cubran toda la matriz el problema es que los usuarios no salen en el mismo orden pero los datos corresponden a los mimos. Si se quiere comprobar solo comentar los dos swap y ver que la primera fila se realiza de manera correcta.
 
 ##Metodo de ejecucion:
 compilamos el archivo:
